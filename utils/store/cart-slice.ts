@@ -1,14 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  initialStatePropertySlice,
-  item,
-  itemsProperty,
-  payloadItems,
-} from '../types';
+import { initialStatePropertySlice, item } from '../types';
 
 const initialState: initialStatePropertySlice = {
   items: [],
   totalQuantity: 0,
+  allProductPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -18,13 +14,15 @@ const cartSlice = createSlice({
   reducers: {
     replaceCart(state, action: PayloadAction<initialStatePropertySlice>) {
       state.items = action.payload.items;
-      state.totalQuantity=action.payload.totalQuantity
+      (state.totalQuantity = action.payload.totalQuantity),
+        (state.allProductPrice = action.payload.allProductPrice);
     },
 
     addItemToCart(state, action: PayloadAction<item>) {
       const newItem = action.payload;
-      const existingItem =state.items.find((item) => item.id === newItem.id)
-        
+    
+      const existingItem = state.items.find((item) => item.id === newItem.id);
+
       state.totalQuantity++;
 
       if (!existingItem) {
@@ -39,28 +37,34 @@ const cartSlice = createSlice({
           quantity: 1,
           totalPrice: newItem.price,
         });
+        console.log(newItem)
+        state.allProductPrice =state.allProductPrice + newItem.price;
       } else {
         existingItem.quantity++;
         existingItem.totalPrice = existingItem.totalPrice + newItem.price;
+        state.allProductPrice = state.allProductPrice + existingItem.price;
       }
-
-
     },
 
-    removeItemfromCart(state, action:PayloadAction<number>) {
+    removeItemfromCart(state, action: PayloadAction<number>) {
       const id = action.payload;
-      const existingItem =state.items.find((item) => item.id === id)
-      
+      const existingItem = state.items.find((item) => item.id === id);
+
       state.totalQuantity--;
-    
-if(existingItem) {
-   if (existingItem.quantity === 1) {
-        state.items = state.items.filter((item) => item.id !== id);
-      }else{
-        existingItem.quantity--;
-        existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
+
+      if (existingItem) {
+        if (existingItem.quantity === 1) {
+          state.items = state.items.filter((item) => item.id !== id);
+          state.allProductPrice =
+          state.allProductPrice - existingItem.totalPrice;
+        } else {
+          existingItem.quantity--;
+          existingItem.totalPrice =
+            existingItem.totalPrice - existingItem.price;
+          state.allProductPrice =
+            state.allProductPrice - existingItem.price;
+        }
       }
-    }
     },
   },
 });

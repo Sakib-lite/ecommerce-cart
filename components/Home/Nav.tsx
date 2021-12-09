@@ -49,24 +49,29 @@ export default function Nav() {
         <div className={`${showDropdown}  lg:block`}>
           <div className='lg:items-center flex justify-evenly '>
             <div className='flex flex-col lg:flex-row lg:mx-6'>
-            <Link href='/' passHref>
-              
-              <a className='md:text-lg lg:text-xl my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 lg:mx-4 lg:my-0'>
-                Home
-              </a>
-            </Link>
+              <Link href='/' passHref>
+                <a className='md:text-lg lg:text-xl my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 lg:mx-4 lg:my-0'>
+                  Home
+                </a>
+              </Link>
               <Link href='/all-products' passHref>
-              
                 <a className='md:text-lg lg:text-xl my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 lg:mx-4 lg:my-0'>
                   Products
                 </a>
               </Link>
-              {/* <a className='md:text-lg lg:text-xl my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 lg:mx-4 lg:my-0'>
-                Contact
-              </a>
-              <a className='md:text-lg lg:text-xl my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 lg:mx-4 lg:my-0'>
-                About
-              </a> */}
+
+              <Link href='/register' passHref>
+                <a className='md:text-lg lg:text-xl my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 lg:mx-4 lg:my-0'>
+                  Sign Up
+                </a>
+              </Link>
+
+              <Link href='/login' passHref>
+           
+                <a className='md:text-lg lg:text-xl my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 lg:mx-4 lg:my-0'>
+                  Log in
+                </a>
+              </Link>
             </div>
 
             <div className='  lg:block'>

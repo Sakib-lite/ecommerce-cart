@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { item } from '../../utils/types';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../utils/store/cart-slice';
+import { useSnackbar } from 'notistack';
 
 export default function CartItem({
   name,
@@ -14,6 +15,7 @@ export default function CartItem({
   category,
 }: item) {
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const addOrderHandler = () => {
     dispatch(
@@ -27,6 +29,8 @@ export default function CartItem({
         category,
       })
     );
+    enqueueSnackbar(`${name} added to cart`, { variant: 'success', autoHideDuration: 1500,
+  });
   };
 
   return (
@@ -35,7 +39,7 @@ export default function CartItem({
         <Image
           alt='ecommerce'
           className='object-cover  w-full h-full '
-          src={image}
+          src={`/images/${image}`}
           width='200'
           height='200'
         />

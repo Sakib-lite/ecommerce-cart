@@ -4,7 +4,6 @@ import { useCookies } from 'react-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import CartList from '../components/cart/CartList';
 
-import styles from '../styles/Home.module.css';
 import { initialStatePropertySlice } from '../utils/types';
 import LandingPage from './../components/Home/LandingPage';
 import { cartActions } from './../utils/store/cart-slice';
@@ -15,7 +14,7 @@ const Home: NextPage = () => {
 
   // console.log(new Date(Date.now() + 2592000))
 useEffect(()=>{
-  dispatch(cartActions.replaceCart(cookies.cart || {items:[],totalQuantity:0}));
+  dispatch(cartActions.replaceCart(cookies.cart || {items:[],totalQuantity:0, allProductPrice:0}));
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
@@ -32,7 +31,7 @@ useEffect(()=>{
   },[cookiesHandler]);
 
   return (
-    <div className={styles.container}>
+    <div >
       
 
       <LandingPage />

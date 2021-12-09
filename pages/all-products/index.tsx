@@ -13,7 +13,7 @@ export default function AllProducts() {
 
   useEffect(() => {
     dispatch(
-      cartActions.replaceCart(cookies.cart || { items: [], totalQuantity: 0 })
+      cartActions.replaceCart(cookies.cart || { items: [], totalQuantity: 0, allProductPrice:0 })
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

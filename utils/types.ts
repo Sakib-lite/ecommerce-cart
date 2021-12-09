@@ -9,11 +9,17 @@ export type item = {
 };
 
 export type cartItems={
-name: string;
-totalPrice: number;
-image: string;
-quantity: number;
-id: number;
+
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  slug: string;
+  id: number;
+  category: string;
+  totalPrice: number;
+  quantity: number;
+
 
 }
 
@@ -31,7 +37,13 @@ export type itemsProperty = {
 export type initialStatePropertySlice = {
   items: itemsProperty[];
   totalQuantity: number;
+  allProductPrice:number
 };
+
+export type initialuiState={
+  spinnigSpinner:boolean
+  showLoginModal:boolean
+}
 
 export type cartItemProperty = {
   name: string;
@@ -39,6 +51,11 @@ export type cartItemProperty = {
   quantity: number;
   image: string;
   id: number;
+  description: string;
+  slug: string;
+  price: number;
+  category: string;
+
 }
 export type payloadItems = {
 cart:itemsProperty[]

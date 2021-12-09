@@ -5,13 +5,18 @@ import AddedItem from './AddedItem';
 import { useSelector, useDispatch } from 'react-redux';
 import EmptyCart from './EmptyCart';
 import { cartActions } from './../../utils/store/cart-slice';
+import LoginModal from '../user/LoginModal';
+import CheckOutForm from './CheckOutForm';
+import { uiActions } from '../../utils/store/ui-slice';
 
 export default function CartPage() {
   const [cookies, setCookie] = useCookies(['cart']);
 const dispatch = useDispatch();
 
+
+
   useEffect(()=>{
-    dispatch(cartActions.replaceCart(cookies.cart || {items:[],totalQuantity:0}));
+    dispatch(cartActions.replaceCart(cookies.cart || {items:[],totalQuantity:0, allProductPrice:0}));
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
@@ -33,15 +38,17 @@ useEffect(() => {
 
 const cartLength=cart.items.length
 
-console.log(cartLength)
+const centerErrorMsg=cartLength ? 'md:flex':''
 
   return (
-    <div>
-      <div className='container  px-4 sm:px-8 max-w-3xl'>
+    <div className={`${centerErrorMsg} mx-auto w-full `}  >
+
+
+         {cartLength>0 ? (   <><div className='  px-4 sm:px-8 max-w-3xl '>
         <div className='py-8'>
-          <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-            <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
-            {cartLength>0 ? (  <table className='min-w-full leading-normal'>
+          <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto '>
+            <div className='inline-block min-w-full shadow rounded-lg overflow-hidden '>
+              <table className='min-w-full leading-normal'>
                 <thead>
                   <tr>
                     <th
@@ -68,8 +75,8 @@ console.log(cartLength)
                     ></th>
                   </tr>
                 </thead>
-                <tbody> 
-    
+                <tbody>
+
                   {cart?.items?.map((product: cartItemProperty) => (
                     <AddedItem
                       key={product.id}
@@ -78,15 +85,27 @@ console.log(cartLength)
                       name={product.name}
                       quantity={product.quantity}
                       id={product.id}
-                    />
-                    
+                      slug={product.slug}
+                      category={product.category}
+                      price={product.price}
+                      description={product.description} />
+
                   ))}
-               </tbody>
-              </table>):<EmptyCart/>}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div><div className="md:mx-auto md:ml-auto ml-16 mt-10">
+
+          <div className=" ">
+            
+
+<CheckOutForm/>
+           </div>
+
+        </div></>):<EmptyCart/>}
+    
+    </div> 
   );
 }
