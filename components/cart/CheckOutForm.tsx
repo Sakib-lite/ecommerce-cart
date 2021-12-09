@@ -24,7 +24,7 @@ const showLoginModal=useSelector((state:{ui:initialuiState})=>state.ui.showLogin
 
     if(!session){
     dispatch(uiActions.showLoginModal())
-    
+    return
     }
 
 enqueueSnackbar('Credit Card number is invalid',{
