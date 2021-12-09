@@ -88,7 +88,7 @@ useEffect(() => {
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className=''>
               <div>
-                <label className='text-gray-700 dark:text-gray-200'>name</label>
+                <label className='text-gray-700 dark:text-gray-200'>FullName</label>
                 <input
                   id='username'
                   type='text'
